@@ -98,4 +98,48 @@ int main()
     {
         cout << e.what() << endl; // Should print "Invalid multiplication: graphs not the same size"
     }
+
+// The effect of the operators on the existing algorithms (assignment 1):
+    ariel::Graph g7;
+    vector<vector<int>> graph7 = {
+        {0, 0, 0, 0, 2},
+        {0, 0, -1, 0, 0},
+        {0, 0, 0, -4, 0},
+        {0, 1, 0, 0, -5},
+        {0, 2, 0, 0, 0}};
+    g7.loadGraph(graph7); // Load the graph to the object.
+    g7.printGraph();                                    // Should print: "Graph with 5 vertices and 6 edges."
+    cout << Algorithms::isConnected(g7) << endl;        // Should print: "1" (true).
+    cout << Algorithms::shortestPath(g7, 0, 4) << endl; // Should print: 0->4.
+    cout << Algorithms::isContainsCycle(g7) << endl;    // Should print: "The cycle is: 1->2->3->1".
+    cout << Algorithms::isBipartite(g7) << endl;        // Should print: "0" (false)."
+    cout << Algorithms::negativeCycle(g7) << endl;    // Should print: "The negative cycle is: 1->2->3->4->1".
+
+    ariel::Graph g8;
+    vector<vector<int>> graph8 = {
+        {0, -1, 0, -4, 2},
+        {0, 0, 1, 0, 0},
+        {5, 0, 0, -4, 0},
+        {0, -1, 0, 0, 4},
+        {0, 2, 0, 0, 0}};
+    g8.loadGraph(graph8);
+
+    g7 -= g8; 
+    cout<<"g7 after Subtraction:"<< endl<<g7;
+    g7.printGraph();                                    // Should print: "Graph with 5 vertices and 6 edges."
+    cout << Algorithms::isConnected(g7) << endl;        // Should print: "1" (true).
+    cout << Algorithms::shortestPath(g7, 0, 4) << endl; // Should print: 0->3->4.
+    cout << Algorithms::isContainsCycle(g7) << endl;    // Should print: "The cycle is: 0->1->2->0".
+    cout << Algorithms::isBipartite(g7) << endl;        // Should print: "0" (false)."
+    cout << Algorithms::negativeCycle(g7) << endl;    // Should print: "The negative cycle is: 2->0->1->2".
+    
+    g7 += g8;
+    g7 += g8; 
+    cout<<"g7 after Subtraction:"<< endl<<g7;    
+    g7.printGraph();                                    // Should print: "Graph with 5 vertices and 7 edges."
+    cout << Algorithms::isConnected(g7) << endl;        // Should print: "0" (false).
+    cout << Algorithms::shortestPath(g7, 0, 4) << endl; // Should print: 0->4.
+    cout << Algorithms::isContainsCycle(g7) << endl;    // Should print: "0" (false).
+    cout << Algorithms::isBipartite(g7) << endl;        // Should print: "0" (false).
+    cout << Algorithms::negativeCycle(g7) << endl;    // Should print: "0" (false).
 }
